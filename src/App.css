@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color:rgb(14, 14, 14);
+}
+.main{
+
+  margin-left: 15%;
+  
+  margin-right: 15%;
+  margin-bottom: 5%;
+  height: 50vh;
+  border-width: 0.1cm;
+  /* border-color:rgb(250, 55, 152);
+  border-color:rgb(155, 52, 104); */
+  /* border-style: dashed; */
+  box-sizing: border-box;
+  
+  justify-content: center;
+  align-items: center;
+  padding-left: 17%;
+  border-radius: 10px;
+  color:rgb(249, 85, 167);
+  box-shadow: 14px 14px 20px #df38a28c;
+  
+  background-color:black;
+  font-family: 'Playfair Display', serif;
+}
+nav{
+  padding:1%;
+  
+  text-emphasis-color: white;
+  color:rgb(246, 7, 166);
+ 
+  
+}
+#tasks{
+  font-family: 'Josefin Sans', sans-serif;
+  color:black;
+  
+}
+#navtext{
+  font-family: 'Playfair Display', 
+  serif;
+  text-shadow: 2px 2px 8px rgb(49, 142, 106);
+}
+.main{
+  
+}
