@@ -4,6 +4,8 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import axios, { isCancel, AxiosError } from "axios";
+
 const Task = () => {
   const [newtask, settask] = useState([]);
   const [newtasktitle, setnewtasktitle] = useState("");
@@ -37,12 +39,13 @@ const Task = () => {
 
     //code for sending data to backed
     //syntax=axios.method(rotename,data or body or object)
-    const response = await axiox.post("/api/task", {
+    const response = await axios.post("/api/task", {
       newtasktitle,
       newtaskdescription,
       newtaskduedate,
       taskstatus: "To Do",
     });
+    console.log(response);
   };
   // const updatestatus = (v, c) => {
   //   const oldtask = [...newtask];
