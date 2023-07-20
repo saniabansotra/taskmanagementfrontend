@@ -39,7 +39,7 @@ const Task = () => {
 
     //code for sending data to backed
     //syntax=axios.method(rotename,data or body or object)
-    const response = await axios.post("/api/task", {
+    const response = await axios.post("/api/createTask", {
       newtasktitle,
       newtaskdescription,
       newtaskduedate,
