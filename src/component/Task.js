@@ -12,6 +12,14 @@ const Task = () => {
   const [newtaskdescription, setnewtaskdescription] = useState("");
 
   const [newtaskduedate, setnewtaskduedate] = useState([new Date()]);
+  const gettask = async () => {
+    const response = await axios.get("/api/gettasks");
+    if (response.data.success) {
+      settask(response.data.data);
+    } else {
+      toast.success("Something went wrong");
+    }
+  };
 
   const createTask = async () => {
     if (
