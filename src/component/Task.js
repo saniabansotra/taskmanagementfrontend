@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,12 +13,13 @@ const Task = () => {
   const [newtaskdescription, setnewtaskdescription] = useState("");
 
   const [newtaskduedate, setnewtaskduedate] = useState([new Date()]);
-  const gettask = async () => {
+
+  const gettasks = async () => {
     const response = await axios.get("/api/gettasks");
     if (response.data.success) {
       settask(response.data.data);
     } else {
-      toast.success("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
@@ -30,15 +32,7 @@ const Task = () => {
       return toast.warning("Please provide complete task details");
     }
 
-    const oldtask = [...newtask];
-    const Uptask = {
-      taskname: newtasktitle,
-      taskdescription: newtaskdescription,
-      taskdate: newtaskduedate,
-      taskstatus: "To Do",
-    };
-    oldtask.push(Uptask);
-    settask(oldtask);
+    gettasks();
 
     toast.success("created successfully");
     setnewtasktitle("");
@@ -53,7 +47,17 @@ const Task = () => {
       newtaskduedate,
       taskstatus: "To Do",
     });
+    gettasks();
     console.log(response);
+  };
+  const handleDelete = async (taskid) => {
+    const response = await axios.delete(`/api/deletetask/${taskid}`);
+    if (response.data.success) {
+      gettasks();
+      toast.success("Task deleted");
+    } else {
+      toast.error("Something went wrong");
+    }
   };
   // const updatestatus = (v, c) => {
   //   const oldtask = [...newtask];
@@ -85,6 +89,9 @@ const Task = () => {
     "In Progress": "rgb(83, 32, 57)",
     Completed: "rgb(127, 51, 88)",
   };
+  useEffect(() => {
+    gettasks();
+  }, []);
   return (
     <>
       <nav>
@@ -148,6 +155,9 @@ const Task = () => {
           click me
           <AddBoxIcon />
         </button>
+        {/* <button onClick={() => gettasks()} type="button">
+          Get tasks
+        </button> */}
       </div>
       {newtask.map((v, i) => {
         return (
@@ -174,7 +184,8 @@ const Task = () => {
                 paddingLeft: "2%",
               }}
               onClick={() =>
-                settask((oldtask) => oldtask.filter((v, index) => index !== i))
+                // settask((oldtask) => oldtask.filter((v, _id) => _id !== i))
+                handleDelete(v._id)
               }
               type="button"
             >
